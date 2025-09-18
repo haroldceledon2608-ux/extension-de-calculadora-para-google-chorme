@@ -1,75 +1,38 @@
-body {
-    background-color: #f2f2f2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-}
-
-.calculator {
-    background-color: #131212;
-    border-radius: 20px;
-    padding: 20px;
-    box-shadow: 0 10px 30px rgba(163, 160, 160, 0.829);
-    width: 320px;
-}
-
-.display {
-    color: #fff;
-    text-align: right;
-    padding: 10px;
-    margin-bottom: 10px;
-    font-size: 3.5rem;
-    font-weight: 300;
-}
-
-.previous-operand {
-    font-size: 1.5rem;
-    color: rgba(255, 255, 255, 0.7);
-    min-height: 20px;
-}
-
-.buttons {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-}
-
-.buttons button {
-    background-color: #505050;
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    font-size: 1.8rem;
-    font-weight: 300;
-    width: 65px;
-    height: 65px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-
-.buttons .operator {
-    background-color: #00ffd5;
-}
-
-.buttons .ac, .buttons .delete {
-    background-color: #d4d4d2;
-    color: #000;
-}
-
-.buttons .equals {
-    background-color: #0066ff;
-}
-
-.buttons button:active {
-    filter: brightness(1.2);
-}
-
-.buttons .span-2 {
-    grid-column: span 2;
-    width: auto;
-    border-radius: 32.5px;
-    text-align: left;
-    padding-left: 20px;
-}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora iPhone</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="calculator">
+        <div class="display">
+            <div class="previous-operand"></div>
+            <div class="current-operand">0</div>
+        </div>
+        <div class="buttons">
+            <button class="ac span-2">AC</button>
+            <button class="delete">DEL</button>
+            <button class="operator">÷</button>
+            <button class="number">7</button>
+            <button class="number">8</button>
+            <button class="number">9</button>
+            <button class="operator">*</button>
+            <button class="number">4</button>
+            <button class="number">5</button>
+            <button class="number">6</button>
+            <button class="operator">-</button>
+            <button class="number">1</button>
+            <button class="number">2</button>
+            <button class="number">3</button>
+            <button class="operator">+</button>
+            <button class="number span-2">0</button>
+            <button class="number">.</button>
+            <button class="equals">=</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
