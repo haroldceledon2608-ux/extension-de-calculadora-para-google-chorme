@@ -1,102 +1,75 @@
-class Calculator {
-    constructor(previousOperandTextElement, currentOperandTextElement) {
-        this.previousOperandTextElement = previousOperandTextElement;
-        this.currentOperandTextElement = currentOperandTextElement;
-        this.clear();
-    }
-
-    clear() {
-        this.currentOperand = '';
-        this.previousOperand = '';
-        this.operation = undefined;
-    }
-
-    delete() {
-        this.currentOperand = this.currentOperand.toString().slice(0, -1);
-    }
-
-    appendNumber(number) {
-        if (number === '.' && this.currentOperand.includes('.')) return;
-        this.currentOperand = this.currentOperand.toString() + number.toString();
-    }
-
-    chooseOperation(operation) {
-        if (this.currentOperand === '') return;
-        if (this.previousOperand !== '') {
-            this.compute();
-        }
-        this.operation = operation;
-        this.previousOperand = this.currentOperand;
-        this.currentOperand = '';
-    }
-
-    compute() {
-        let computation;
-        const prev = parseFloat(this.previousOperand);
-        const current = parseFloat(this.currentOperand);
-        if (isNaN(prev) || isNaN(current)) return;
-        switch (this.operation) {
-            case '+':
-                computation = prev + current;
-                break;
-            case '-':
-                computation = prev - current;
-                break;
-            case '*':
-                computation = prev * current;
-                break;
-            case '÷':
-                computation = prev / current;
-                break;
-            default:
-                return;
-        }
-        this.currentOperand = computation;
-        this.operation = undefined;
-        this.previousOperand = '';
-    }
-
-    updateDisplay() {
-        this.currentOperandTextElement.innerText = this.currentOperand;
-        this.previousOperandTextElement.innerText = this.previousOperand;
-    }
+body {
+    background-color: #f2f2f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
 }
 
-const numberButtons = document.querySelectorAll('.number');
-const operatorButtons = document.querySelectorAll('.operator');
-const equalsButton = document.querySelector('.equals');
-const deleteButton = document.querySelector('.delete');
-const allClearButton = document.querySelector('.ac');
-const previousOperandTextElement = document.querySelector('.previous-operand');
-const currentOperandTextElement = document.querySelector('.current-operand');
+.calculator {
+    background-color: #131212;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(163, 160, 160, 0.829);
+    width: 320px;
+}
 
-const calculator = new Calculator(previousOperandTextElement, currentOperandTextElement);
+.display {
+    color: #fff;
+    text-align: right;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 3.5rem;
+    font-weight: 300;
+}
 
-numberButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        calculator.appendNumber(button.innerText);
-        calculator.updateDisplay();
-    });
-});
+.previous-operand {
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.7);
+    min-height: 20px;
+}
 
-operatorButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        calculator.chooseOperation(button.innerText);
-        calculator.updateDisplay();
-    });
-});
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
 
-equalsButton.addEventListener('click', button => {
-    calculator.compute();
-    calculator.updateDisplay();
-});
+.buttons button {
+    background-color: #505050;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.8rem;
+    font-weight: 300;
+    width: 65px;
+    height: 65px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
 
-allClearButton.addEventListener('click', button => {
-    calculator.clear();
-    calculator.updateDisplay();
-});
+.buttons .operator {
+    background-color: #00ffd5;
+}
 
-deleteButton.addEventListener('click', button => {
-    calculator.delete();
-    calculator.updateDisplay();
-});
+.buttons .ac, .buttons .delete {
+    background-color: #d4d4d2;
+    color: #000;
+}
+
+.buttons .equals {
+    background-color: #0066ff;
+}
+
+.buttons button:active {
+    filter: brightness(1.2);
+}
+
+.buttons .span-2 {
+    grid-column: span 2;
+    width: auto;
+    border-radius: 32.5px;
+    text-align: left;
+    padding-left: 20px;
+}
